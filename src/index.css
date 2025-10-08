@@ -1,0 +1,117 @@
+@font-face {
+    font-family: Roboto;
+    src: url('assets/fonts/roboto-normal.ttf');
+    font-style: normal;
+}
+@font-face {
+    font-family: Roboto;
+    src: url('assets/fonts/roboto-italic.ttf');
+    font-style: italic;
+}
+.balanced {
+max-inline-size: 59ch;
+text-wrap: balance;
+}
+@import "tailwindcss";
+
+@theme {
+    --font-roboto: Roboto, 'sans-serif';
+    --color-primary: #151b42;
+    --color-secondary: #CEFFAD;
+}
+
+@theme inline {
+    --color-background: var(--theme-color-background);
+    --color-frontground: var(--theme-color-frontground);
+    --color-text: var(--theme-color-text);
+    --color-title: var(--theme-color-title);
+    --color-title-pos: var(--theme-color-title-pos);
+    --shadow-t-sm: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-all-3xl: 0 0 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+.rgb-button {
+    @apply px-4 py-3 text-sm font-medium rounded-xl shadow-lg text-white cursor-pointer;
+    background: linear-gradient(270deg, #3b82f6, #34d399, #10b981, #3b82f6);
+    background-size: 600% 600%;
+    animation: rgbLed 10s ease infinite;
+}
+
+@keyframes rgbLed {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@layer base {
+    [data-theme="light"] {
+        --theme-color-background: #f5f5f7;
+        --theme-color-frontground: #ffffff;
+        --theme-color-text: #515151;
+        --theme-color-title: #151b42;
+        --theme-color-title-tracibility: #1d30ab;
+        --theme-color-title-pos: #3A59D1;
+        
+    }
+
+    [data-theme="dark"] {
+        --theme-color-background: #282a36;
+        --theme-color-frontground: #313341;
+        --theme-color-text: #fff;
+        --theme-color-title: #CEFFAD;
+        --theme-color-title-tracibility: #ffffff;
+        --theme-color-title-pos: #CEFFAD;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow linear infinite;
+    transform-origin: center;
+}
+
+@layer utilities {
+    @keyframes bounce-down {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(6px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .hover\:bounce-down:hover {
+        animation: bounce-down 0.4s ease;
+    }
+
+    .text-md {
+        font-size: 1.125rem;
+    }
+    .text-title-tracibility {
+        color: var(--theme-color-title-tracibility);
+    }
+}
+
+
